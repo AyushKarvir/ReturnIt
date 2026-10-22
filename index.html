@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +6,6 @@
 <meta name="theme-color" content="#0b0b12">
 <meta name="description" content="ReturnIt — the campus lost and found platform.">
 <title>ReturnIt — Campus Lost & Found</title>
-
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
@@ -382,7 +380,6 @@ footer { margin-top:65px; border-top:1px solid var(--line); padding:25px 0; colo
 }
 </style>
 </head>
-
 <body>
 <header>
   <div class="wrap nav">
@@ -400,7 +397,6 @@ footer { margin-top:65px; border-top:1px solid var(--line); padding:25px 0; colo
 </div>
   </div>
 </header>
-
 <main class="wrap">
   <section class="hero">
     <div class="hero-grid">
@@ -421,13 +417,11 @@ footer { margin-top:65px; border-top:1px solid var(--line); padding:25px 0; colo
       </div>
     </div>
   </section>
-
   <section class="stats" aria-label="Listing statistics">
     <div class="stat"><div class="stat-number" id="totalCount">0</div><div class="stat-label">Total listings</div></div>
     <div class="stat"><div class="stat-number" id="lostCount">0</div><div class="stat-label">Items reported lost</div></div>
     <div class="stat"><div class="stat-number" id="foundCount">0</div><div class="stat-label">Items reported found</div></div>
   </section>
-
   <section class="section" id="listings">
     <div class="section-head">
       <div>
@@ -442,22 +436,22 @@ footer { margin-top:65px; border-top:1px solid var(--line); padding:25px 0; colo
       </form>
     </div>
 
-    <div class="toolbar">
-      <div class="filters" aria-label="Listing filters">
-        <button class="chip active" data-filter="All" aria-pressed="true">All items</button>
-        <button class="chip" data-filter="Lost" aria-pressed="false">Lost</button>
-        <button class="chip" data-filter="Found" aria-pressed="false">Found</button>
-      </div>
-      <select class="sort" id="sortSelect" aria-label="Sort listings">
-        <option value="newest">Newest first</option>
-        <option value="oldest">Oldest first</option>
-        <option value="az">Name A–Z</option>
-      </select>
-    </div>
+<div class="toolbar">
+  <div class="filters" aria-label="Listing filters">
+    <button class="chip active" data-filter="All" aria-pressed="true">All items</button>
+    <button class="chip" data-filter="Lost" aria-pressed="false">Lost</button>
+    <button class="chip" data-filter="Found" aria-pressed="false">Found</button>
+  </div>
+  <select class="sort" id="sortSelect" aria-label="Sort listings">
+    <option value="newest">Newest first</option>
+    <option value="oldest">Oldest first</option>
+    <option value="az">Name A–Z</option>
+  </select>
+</div>
 
-    <div class="grid" id="itemsGrid" aria-live="polite"></div>
+<div class="grid" id="itemsGrid" aria-live="polite"></div>
+
   </section>
-
   <section class="section" id="how">
     <div class="kicker">Simple by design</div>
     <h2 class="section-title">Lost. Listed. Reunited.</h2>
@@ -468,56 +462,57 @@ footer { margin-top:65px; border-top:1px solid var(--line); padding:25px 0; colo
       <article class="step"><div class="step-icon">🤝</div><h3>03 — Reconnect</h3><p>Use the campus return process to reunite people with their belongings.</p></article>
     </div>
   </section>
-
   <section class="cta">
     <div><div class="kicker">Help your community</div><h2>Found something? Make a difference.</h2><p>One report could make someone's day.</p></div>
     <button class="btn btn-primary" id="ctaReport">＋ Report an item</button>
   </section>
 
-<section id="security-lab" class="section" style="padding-top:24px;padding-bottom:40px">
-  <div class="section-heading">
-    <div><span class="eyebrow">CONTRIBUTOR PRACTICE</span><h2>ReturnIt Security Lab</h2>
-      <p class="muted">Isolated browser-only exercises using dummy data. No Supabase records are changed.</p></div>
-  </div>
-  <div class="grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px">
-    <article class="card" style="padding:20px">
-      <span class="eyebrow">Exercise 01</span><h3>Listing access</h3>
-      <p class="muted">Try viewing or changing a demo listing by its ID. Review how ownership is checked.</p>
-      <label for="labItemId">Listing ID</label>
-      <input id="labItemId" value="RI-2002" style="width:100%;margin:8px 0;padding:10px;border-radius:8px">
-      <label for="labItemStatus">New status</label>
-      <select id="labItemStatus" style="width:100%;margin:8px 0;padding:10px;border-radius:8px"><option>Open</option><option>Claimed</option><option>Returned</option></select>
-      <button class="btn btn-primary" id="labItemAction" type="button">View / update demo listing</button>
-      <pre id="labItemOutput" style="white-space:pre-wrap;overflow-wrap:anywhere;margin-top:12px"></pre>
-    </article>
-    <article class="card" style="padding:20px">
-      <span class="eyebrow">Exercise 02</span><h3>Search query handling</h3>
-      <p class="muted">This is a front-end simulation of unsafe SQL string construction, not a real database query.</p>
-      <label for="labSearch">Search term</label>
-      <input id="labSearch" placeholder="Try a normal search term" style="width:100%;margin:8px 0;padding:10px;border-radius:8px">
-      <button class="btn btn-primary" id="labSearchAction" type="button">Run simulated search</button>
-      <pre id="labSearchOutput" style="white-space:pre-wrap;overflow-wrap:anywhere;margin-top:12px"></pre>
-    </article>
-    <article class="card" style="padding:20px">
-      <span class="eyebrow">Exercise 03</span><h3>Photo upload checks</h3>
-      <p class="muted">Select a file to inspect what browser-only validation can and cannot guarantee. Nothing is uploaded to a server.</p>
-      <label for="labFile">Choose test file</label>
-      <input id="labFile" type="file" style="display:block;width:100%;margin:12px 0">
-      <button class="btn btn-primary" id="labFileAction" type="button">Inspect selected file</button>
-      <pre id="labFileOutput" style="white-space:pre-wrap;overflow-wrap:anywhere;margin-top:12px"></pre>
-    </article>
-  </div>
-</section>
+  <section class="section" id="security-challenges" aria-labelledby="security-title">
+    <div class="kicker">Open-source contributor tasks</div>
+    <h2 class="section-title" id="security-title">Security challenges</h2>
+    <p class="muted">Three frontend-only training challenges using dummy data. They do not call Supabase or change real listings.</p>
+    <div class="steps">
+      <article class="step">
+        <div class="step-icon">🔐</div><h3>Challenge 01 — Access control</h3>
+        <p>Inspect whether the demo checks item ownership before allowing a change.</p>
+        <label for="idorItem" class="muted">Dummy listing</label>
+        <select id="idorItem" class="sort" style="max-width:100%;width:100%;margin:8px 0">
+          <option value="demo-a">Library book (owner: account-a)</option>
+          <option value="demo-b">Calculator (owner: account-b)</option>
+        </select>
+        <label for="idorActor" class="muted">Current demo account</label>
+        <select id="idorActor" class="sort" style="max-width:100%;width:100%;margin:8px 0">
+          <option value="account-b">Account B</option><option value="account-a">Account A</option>
+        </select>
+        <button class="btn" id="idorTry" type="button">Attempt demo edit</button>
+        <p class="muted" id="idorResult" aria-live="polite"></p>
+      </article>
+      <article class="step">
+        <div class="step-icon">🧪</div><h3>Challenge 02 — SQL injection concepts</h3>
+        <p>This is a query-construction simulation only; it does not execute SQL or contact a database.</p>
+        <label for="sqlDemoInput" class="muted">Search input</label>
+        <input id="sqlDemoInput" maxlength="120" placeholder="Try normal text or a quote" style="width:100%;margin:8px 0;padding:10px;border-radius:9px;background:#0d0d16;color:white;border:1px solid var(--line)">
+        <button class="btn" id="sqlDemoTry" type="button">Inspect simulated query</button>
+        <p class="muted" id="sqlDemoResult" aria-live="polite"></p>
+      </article>
+      <article class="step">
+        <div class="step-icon">📁</div><h3>Challenge 03 — File validation</h3>
+        <p>Choose a harmless test file. This local exercise demonstrates why client-side checks alone are not a security boundary. The file is not uploaded.</p>
+        <label for="uploadDemoInput" class="muted">Choose a test file</label>
+        <input id="uploadDemoInput" type="file" style="width:100%;margin:8px 0">
+        <button class="btn" id="uploadDemoTry" type="button">Inspect selected file</button>
+        <p class="muted" id="uploadDemoResult" aria-live="polite"></p>
+      </article>
+    </div>
+  </section>
 
 </main>
-
 <footer>
   <div class="wrap footer-inner">
     <span>© 2026 ReturnIt · Campus Lost & Found</span>
     <span>Designed for campus life.</span>
   </div>
 </footer>
-
 <div class="overlay" id="reportModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="modal">
     <div class="modal-head">
@@ -529,72 +524,72 @@ footer { margin-top:65px; border-top:1px solid var(--line); padding:25px 0; colo
       <button class="icon-btn" id="closeModal" type="button" aria-label="Close">×</button>
     </div>
 
-    <form id="reportForm">
-      <div class="form-grid">
-        <div class="field">
-          <label for="itemName">Item name *</label>
-          <input id="itemName" maxlength="80" required placeholder="e.g. Black calculator">
-        </div>
-        <div class="field">
-          <label for="itemType">Report type *</label>
-          <select id="itemType" required>
-            <option value="Lost">I lost this item</option>
-            <option value="Found">I found this item</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="itemCategory">Category *</label>
-          <select id="itemCategory" required>
-            <option value="ID Cards">ID cards</option>
-            <option value="Books">Books</option>
-            <option value="Electronics">Electronics</option>
-            <option value="Stationery">Stationery</option>
-            <option value="Keys & Wallets">Keys & wallets</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="itemLocation">Campus location *</label>
-          <input id="itemLocation" maxlength="100" required placeholder="e.g. Library, Block B">
-        </div>
+<form id="reportForm">
+  <div class="form-grid">
+    <div class="field">
+      <label for="itemName">Item name *</label>
+      <input id="itemName" maxlength="80" required placeholder="e.g. Black calculator">
+    </div>
+    <div class="field">
+      <label for="itemType">Report type *</label>
+      <select id="itemType" required>
+        <option value="Lost">I lost this item</option>
+        <option value="Found">I found this item</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="itemCategory">Category *</label>
+      <select id="itemCategory" required>
+        <option value="ID Cards">ID cards</option>
+        <option value="Books">Books</option>
+        <option value="Electronics">Electronics</option>
+        <option value="Stationery">Stationery</option>
+        <option value="Keys & Wallets">Keys & wallets</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="itemLocation">Campus location *</label>
+      <input id="itemLocation" maxlength="100" required placeholder="e.g. Library, Block B">
+    </div>
 
-        <div class="field full">
-          <label>Item photo (optional)</label>
-          <input id="photoInput" type="file" accept="image/jpeg,image/png,image/webp">
-          <div class="upload-box" id="uploadBox" role="button" tabindex="0" aria-label="Choose item photo">
-            <div class="upload-icon">📷</div>
-            <div class="upload-title">Click to upload a photo</div>
-            <div class="upload-hint">JPG, PNG or WebP · Maximum <strong>5 MB</strong></div>
-          </div>
-          <div class="preview-wrap" id="previewWrap">
-            <img class="preview-img" id="photoPreview" alt="Preview of selected item photo">
-            <div class="preview-info" id="photoInfo"></div>
-            <button class="remove-photo" id="removePhoto" type="button">Remove photo ×</button>
-          </div>
-          <div class="form-error" id="photoError" role="status" aria-live="polite"></div>
-        </div>
-
-        <div class="field full">
-          <label for="itemDescription">Description *</label>
-          <textarea id="itemDescription" maxlength="500" required placeholder="Describe its appearance and distinguishing features."></textarea>
-        </div>
-
-        <div class="field full">
-          <p class="form-hint">
-            Avoid photos showing personal documents, student ID numbers, phone numbers or other sensitive information.
-            This prototype stores photos in this browser only. Supabase shared storage will be connected separately.
-          </p>
-        </div>
+    <div class="field full">
+      <label>Item photo (optional)</label>
+      <input id="photoInput" type="file" accept="image/jpeg,image/png,image/webp">
+      <div class="upload-box" id="uploadBox" role="button" tabindex="0" aria-label="Choose item photo">
+        <div class="upload-icon">📷</div>
+        <div class="upload-title">Click to upload a photo</div>
+        <div class="upload-hint">JPG, PNG or WebP · Maximum <strong>5 MB</strong></div>
       </div>
-
-      <div class="form-actions">
-        <button class="btn" id="cancelModal" type="button">Cancel</button>
-        <button class="btn btn-primary" id="publishBtn" type="submit">Publish listing ↗</button>
+      <div class="preview-wrap" id="previewWrap">
+        <img class="preview-img" id="photoPreview" alt="Preview of selected item photo">
+        <div class="preview-info" id="photoInfo"></div>
+        <button class="remove-photo" id="removePhoto" type="button">Remove photo ×</button>
       </div>
-    </form>
+      <div class="form-error" id="photoError" role="status" aria-live="polite"></div>
+    </div>
+
+    <div class="field full">
+      <label for="itemDescription">Description *</label>
+      <textarea id="itemDescription" maxlength="500" required placeholder="Describe its appearance and distinguishing features."></textarea>
+    </div>
+
+    <div class="field full">
+      <p class="form-hint">
+        Avoid photos showing personal documents, student ID numbers, phone numbers or other sensitive information.
+        This prototype stores photos in this browser only. Supabase shared storage will be connected separately.
+      </p>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <button class="btn" id="cancelModal" type="button">Cancel</button>
+    <button class="btn btn-primary" id="publishBtn" type="submit">Publish listing ↗</button>
+  </div>
+</form>
+
   </div>
 </div>
-
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <div class="overlay" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
   <div class="modal">
@@ -607,36 +602,36 @@ footer { margin-top:65px; border-top:1px solid var(--line); padding:25px 0; colo
       <button class="icon-btn" id="closeAuth" type="button" aria-label="Close">×</button>
     </div>
 
-    <form id="authForm">
-      <div class="form-grid">
-        <div class="field full" id="authNameField">
-          <label for="authName">Full name</label>
-          <input id="authName" type="text" maxlength="100" autocomplete="name" placeholder="Your full name">
-        </div>
+<form id="authForm">
+  <div class="form-grid">
+    <div class="field full" id="authNameField">
+      <label for="authName">Full name</label>
+      <input id="authName" type="text" maxlength="100" autocomplete="name" placeholder="Your full name">
+    </div>
 
-        <div class="field full">
-          <label for="authEmail">Email address</label>
-          <input id="authEmail" type="email" maxlength="254" autocomplete="email" required placeholder="you@example.com">
-        </div>
+    <div class="field full">
+      <label for="authEmail">Email address</label>
+      <input id="authEmail" type="email" maxlength="254" autocomplete="email" required placeholder="you@example.com">
+    </div>
 
-        <div class="field full">
-          <label for="authPassword">Password</label>
-          <input id="authPassword" type="password" minlength="8" maxlength="128" autocomplete="current-password" required placeholder="At least 8 characters">
-        </div>
+    <div class="field full">
+      <label for="authPassword">Password</label>
+      <input id="authPassword" type="password" minlength="8" maxlength="128" autocomplete="current-password" required placeholder="At least 8 characters">
+    </div>
 
-        <div class="field full">
-          <div class="form-error" id="authError" role="status" aria-live="polite"></div>
-        </div>
-      </div>
+    <div class="field full">
+      <div class="form-error" id="authError" role="status" aria-live="polite"></div>
+    </div>
+  </div>
 
-      <div class="form-actions" style="justify-content:space-between;flex-wrap:wrap">
-        <button class="btn" id="authModeToggle" type="button">Create account</button>
-        <button class="btn btn-primary" id="authSubmit" type="submit">Sign in ↗</button>
-      </div>
-    </form>
+  <div class="form-actions" style="justify-content:space-between;flex-wrap:wrap">
+    <button class="btn" id="authModeToggle" type="button">Create account</button>
+    <button class="btn btn-primary" id="authSubmit" type="submit">Sign in ↗</button>
+  </div>
+</form>
+
   </div>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 "use strict";
@@ -1265,49 +1260,41 @@ $("reportForm").addEventListener("submit", async event => {
 });
 
 
-// SECURITY LAB: intentionally weak demo logic for contributor review.
-// These exercises operate only on dummy browser-side data; they do not call Supabase.
-const labItems = [
-  { id: "RI-1001", ownerId: "student-1001", name: "Blue notebook", status: "Open" },
-  { id: "RI-2002", ownerId: "student-2002", name: "Demo wallet", status: "Open" }
+// Security-lab demonstrations: dummy data only; never call Supabase here.
+const securityDemoItems = [
+  {id:"demo-a", name:"Library book", owner:"account-a", description:"Dummy record"},
+  {id:"demo-b", name:"Calculator", owner:"account-b", description:"Dummy record"}
 ];
-const labCurrentUserId = "student-1001";
 
-// Exercise 01: intentionally fails to enforce ownership before updating by ID.
-$("labItemAction").addEventListener("click", () => {
-  const requestedId = $("labItemId").value.trim();
-  const item = labItems.find(row => row.id === requestedId);
-  if (!item) {
-    $("labItemOutput").textContent = "No demo listing found.";
-    return;
-  }
-  item.status = $("labItemStatus").value;
-  $("labItemOutput").textContent = JSON.stringify({
-    currentUser: labCurrentUserId,
-    itemId: item.id,
-    itemOwner: item.ownerId,
-    itemName: item.name,
-    status: item.status
-  }, null, 2);
+// Challenge 01: intentionally weak demo authorization. Fix by enforcing ownership
+// on a trusted server/database, not merely by trusting a client-supplied ID.
+$("idorTry").addEventListener("click", () => {
+  const item = securityDemoItems.find(x => x.id === $("idorItem").value);
+  const actor = $("idorActor").value;
+  if (!item) return;
+  // Intentional challenge: this demo action does not verify actor === item.owner.
+  item.description = "Edited by " + actor;
+  $("idorResult").textContent = "Demo record changed: " + item.name + ". Owner is " + item.owner + "; actor is " + actor + ". Dummy data only.";
 });
 
-// Exercise 02: intentionally builds a SQL-looking string with raw user input.
-// It is displayed only; no SQL is executed and no database is connected.
-$("labSearchAction").addEventListener("click", () => {
-  const term = $("labSearch").value;
-  const simulatedSql = "SELECT id, name FROM items WHERE name ILIKE '%" + term + "%';";
-  $("labSearchOutput").textContent = "SIMULATED QUERY (not executed):\n" + simulatedSql +
-    "\n\nReview whether raw input should be concatenated into a SQL statement.";
+// Challenge 02: simulated unsafe query construction; no SQL is executed.
+$("sqlDemoTry").addEventListener("click", () => {
+  const input = $("sqlDemoInput").value;
+  const simulated = "SELECT * FROM demo_items WHERE name = '" + input + "'";
+  $("sqlDemoResult").textContent = input.includes("'")
+    ? "The simulated query contains an unescaped quote. No SQL was executed. Investigate parameterized queries."
+    : "Simulated query: " + simulated + " — no database request was made.";
 });
 
-// Exercise 03: intentionally reports file metadata without validating type or size.
-// The file stays in the browser and is never uploaded or executed.
-$("labFileAction").addEventListener("click", () => {
-  const file = $("labFile").files[0];
-  $("labFileOutput").textContent = file
-    ? JSON.stringify({ name: file.name, type: file.type || "(no MIME type)", sizeBytes: file.size, accepted: true }, null, 2)
-    : "Choose a file first.";
+// Challenge 03: intentionally reports file metadata without validating it.
+// The selected file remains local and is never uploaded or executed.
+$("uploadDemoTry").addEventListener("click", () => {
+  const file = $("uploadDemoInput").files?.[0];
+  $("uploadDemoResult").textContent = file
+    ? "Demo accepted selection: " + file.name + " (" + file.type + ", " + file.size + " bytes). No upload occurred. Investigate type, size, content-signature and server-side validation."
+    : "Choose a harmless test file first.";
 });
+
 
 renderItems();
 </script>
