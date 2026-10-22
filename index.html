@@ -1268,13 +1268,28 @@ const securityDemoItems = [
 
 // Challenge 01: intentionally weak demo authorization. Fix by enforcing ownership
 // on a trusted server/database, not merely by trusting a client-supplied ID.
-$("idorTry").addEventListener("click", () => {
-  const item = securityDemoItems.find(x => x.id === $("idorItem").value);
-  const actor = $("idorActor").value;
-  if (!item) return;
-  // Intentional challenge: this demo action does not verify actor === item.owner.
+$("#idorTry").addEventListener("click", () => {
+  const item = securityDemoItems.find(
+    x => x.id === $("#idorItem").value
+  );
+  const actor = $("#idorActor").value;
+  const result = $("#idorResult");
+
+  if (!item) {
+    result.textContent = "Access denied: item not found.";
+    return;
+  }
+
+  if (!actor || actor !== item.owner) {
+    result.textContent =
+      "Access denied: you cannot edit another account's item.";
+    return;
+  }
+
   item.description = "Edited by " + actor;
-  $("idorResult").textContent = "Demo record changed: " + item.name + ". Owner is " + item.owner + "; actor is " + actor + ". Dummy data only.";
+
+  result.textContent =
+    "Success: " + item.name + " was edited by its owner. Demo data only.";
 });
 
 // Challenge 02: simulated unsafe query construction; no SQL is executed.
