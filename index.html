@@ -1,0 +1,1016 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b0b12">
+<meta name="description" content="ReturnIt — the campus lost and found platform.">
+<title>ReturnIt — Campus Lost & Found</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  color-scheme: dark;
+  --bg:#0b0b12;
+  --panel:#13131d;
+  --panel2:#191925;
+  --line:#292936;
+  --text:#f6f5fc;
+  --muted:#9998ad;
+  --accent:#a08bff;
+  --accent2:#7660ed;
+  --green:#6fe1b1;
+  --red:#ff8fa6;
+  --radius:18px;
+}
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:'DM Sans',sans-serif; line-height:1.6;
+}
+button,input,select,textarea { font:inherit; }
+button { cursor:pointer; }
+a { color:inherit; text-decoration:none; }
+button:focus-visible,a:focus-visible,input:focus-visible,
+select:focus-visible,textarea:focus-visible {
+  outline:2px solid var(--accent); outline-offset:3px;
+}
+.wrap { width:min(1160px,92%); margin:auto; }
+
+header {
+  position:sticky; top:0; z-index:10;
+  background:#0b0b12eF; backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);
+}
+.nav {
+  min-height:74px; display:flex; align-items:center;
+  justify-content:space-between; gap:18px;
+}
+.brand {
+  display:flex; align-items:center; gap:10px;
+  font:700 23px 'Space Grotesk',sans-serif;
+  letter-spacing:-1px;
+}
+.brand-icon {
+  display:grid; place-items:center; width:39px; height:39px;
+  border-radius:12px; background:linear-gradient(135deg,#b6a4ff,#6850e8);
+  box-shadow:0 0 24px #8468ff28;
+}
+.brand-name span { color:var(--accent); }
+.nav-links { display:flex; gap:25px; }
+.nav-links a { color:var(--muted); font-size:13px; }
+.nav-links a:hover { color:white; }
+
+.btn {
+  display:inline-flex; justify-content:center; align-items:center;
+  gap:8px; border:1px solid var(--line); border-radius:11px;
+  padding:11px 16px; color:var(--text); background:var(--panel2);
+  font-size:13px; font-weight:700; transition:.2s;
+}
+.btn:hover { transform:translateY(-2px); border-color:#a08bff80; }
+.btn-primary {
+  background:linear-gradient(120deg,#9c83ff,#6e55eb);
+  border-color:transparent; color:white;
+  box-shadow:0 5px 22px #7960ee20;
+}
+.btn:disabled { opacity:.5; cursor:not-allowed; transform:none; }
+.icon-btn {
+  width:37px; height:37px; border:1px solid var(--line);
+  border-radius:10px; color:white; background:var(--panel2);
+  font-size:20px;
+}
+
+.hero {
+  position:relative; overflow:hidden; margin-top:28px;
+  padding:55px 48px; border:1px solid #9580ff24;
+  border-radius:25px;
+  background:radial-gradient(ellipse at 90% 15%,#8d70ff20,transparent 36%),
+             linear-gradient(120deg,#151426,#10101a);
+}
+.hero-grid {
+  display:grid; grid-template-columns:1.15fr .85fr;
+  gap:25px; align-items:center;
+}
+.eyebrow {
+  display:inline-flex; align-items:center; gap:8px;
+  color:#c7bbff; background:#a08bff10;
+  border:1px solid #a08bff35; border-radius:30px;
+  padding:6px 11px; font-size:10px; font-weight:700;
+  letter-spacing:1.3px; text-transform:uppercase;
+}
+.dot {
+  width:7px; height:7px; border-radius:50%;
+  background:var(--green); box-shadow:0 0 12px var(--green);
+}
+h1,h2,h3,p { margin-top:0; }
+h1 {
+  margin:22px 0 17px;
+  font:700 clamp(40px,5.5vw,65px)/1.08 'Space Grotesk',sans-serif;
+  letter-spacing:-3px;
+}
+.gradient {
+  background:linear-gradient(95deg,#c5b8ff,#8c78ff 55%,#7bd5ff);
+  color:transparent; background-clip:text;
+}
+.hero-copy { max-width:490px; color:var(--muted); font-size:14px; }
+.hero-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
+.hero-art { min-height:255px; display:grid; place-items:center; position:relative; }
+.hero-art::before,.hero-art::after {
+  content:""; position:absolute; border:1px solid #9c88ff28;
+  width:230px; height:230px; border-radius:50%;
+}
+.hero-art::after { width:175px; height:175px; border-style:dashed; }
+.hero-emblem {
+  z-index:1; display:grid; place-items:center; width:140px; height:140px;
+  border:1px solid #a08bff60; border-radius:38px; font-size:66px;
+  background:linear-gradient(145deg,#292244,#151629);
+  box-shadow:0 0 65px #8d72ff22;
+  animation:float 5s ease-in-out infinite;
+}
+@keyframes float {
+  0%,100% { transform:translateY(0) rotate(-5deg); }
+  50% { transform:translateY(-9px) rotate(-2deg); }
+}
+
+.stats {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  margin:22px 0 65px; border:1px solid var(--line);
+  border-radius:16px; background:var(--panel); overflow:hidden;
+}
+.stat { padding:21px 25px; border-right:1px solid var(--line); }
+.stat:last-child { border:0; }
+.stat-number { font:700 30px 'Space Grotesk',sans-serif; }
+.stat-label { color:var(--muted); font-size:12px; }
+
+.section { margin-bottom:65px; }
+.kicker { color:var(--accent); font-size:10px; font-weight:700; letter-spacing:1.8px; text-transform:uppercase; }
+.section-title {
+  font:700 clamp(25px,3.5vw,35px) 'Space Grotesk',sans-serif;
+  letter-spacing:-1px; margin:6px 0;
+}
+.muted { color:var(--muted); font-size:13px; }
+.section-head {
+  display:flex; justify-content:space-between; align-items:end;
+  flex-wrap:wrap; gap:20px; margin-bottom:23px;
+}
+.search {
+  display:flex; align-items:center; gap:8px; width:min(390px,100%);
+  padding:6px 7px 6px 13px; border:1px solid var(--line);
+  border-radius:12px; background:var(--panel);
+}
+.search input {
+  flex:1; min-width:0; padding:8px 0;
+  border:0; outline:0; background:transparent; color:white;
+}
+.search input:focus { outline:0; }
+.search input::placeholder { color:#77768b; }
+.search .btn { padding:9px 13px; }
+
+.toolbar {
+  display:flex; justify-content:space-between; align-items:center;
+  flex-wrap:wrap; gap:13px; margin-bottom:20px;
+}
+.filters { display:flex; gap:7px; flex-wrap:wrap; }
+.chip {
+  padding:8px 13px; border:1px solid var(--line);
+  border-radius:9px; color:var(--muted); background:var(--panel);
+  font-size:12px; font-weight:600;
+}
+.chip:hover { border-color:#a08bff70; color:white; }
+.chip.active { color:white; border-color:#a08bff80; background:#a08bff1c; }
+.sort {
+  max-width:160px; padding:9px 11px; color:var(--muted);
+  border:1px solid var(--line); border-radius:9px;
+  background:var(--panel); font-size:12px;
+}
+
+.grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:17px; }
+.card {
+  overflow:hidden; border:1px solid var(--line);
+  border-radius:16px; background:linear-gradient(145deg,#171723,#11111b);
+  transition:transform .22s,border-color .22s,box-shadow .22s;
+  animation:appear .3s ease both;
+}
+.card:hover {
+  transform:translateY(-4px); border-color:#a08bff65;
+  box-shadow:0 15px 35px #0003;
+}
+@keyframes appear {
+  from { opacity:0; transform:translateY(8px); }
+  to { opacity:1; transform:translateY(0); }
+}
+.card-media {
+  height:180px; position:relative; overflow:hidden;
+  display:grid; place-items:center;
+  background:radial-gradient(circle,#292443,#181825);
+  border-bottom:1px solid var(--line);
+}
+.card-media img { width:100%; height:100%; object-fit:cover; }
+.card-placeholder { font-size:55px; }
+.status {
+  position:absolute; top:12px; left:12px; z-index:1;
+  padding:4px 9px; border-radius:7px;
+  font-size:10px; font-weight:700;
+  background:#ff8fa622; color:var(--red);
+  border:1px solid #ff8fa638;
+}
+.status.found { background:#6fe1b11c; color:var(--green); border-color:#6fe1b138; }
+.card-body { padding:16px; }
+.category {
+  color:var(--accent); font-size:10px; font-weight:700;
+  text-transform:uppercase; letter-spacing:.8px;
+}
+.card h3 {
+  font:600 17px 'Space Grotesk',sans-serif;
+  margin:7px 0; overflow-wrap:anywhere;
+}
+.description {
+  color:var(--muted); font-size:12px; min-height:38px;
+  overflow-wrap:anywhere;
+}
+.location { color:#c2bfd7; font-size:11px; margin-top:13px; }
+.card-bottom {
+  display:flex; justify-content:space-between; align-items:center;
+  gap:8px; border-top:1px solid var(--line);
+  padding-top:12px; margin-top:13px;
+}
+.date { color:var(--muted); font-size:10px; }
+.card-bottom .btn { padding:8px 10px; font-size:11px; }
+.empty {
+  grid-column:1/-1; padding:45px 20px; text-align:center;
+  border:1px dashed #a08bff40; border-radius:15px;
+}
+.empty-icon { font-size:36px; }
+.empty h3 { margin:10px 0 4px; }
+.empty p { color:var(--muted); font-size:13px; }
+
+.steps { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.step {
+  padding:23px; border:1px solid var(--line);
+  border-radius:15px; background:var(--panel);
+}
+.step-icon {
+  display:grid; place-items:center; width:43px; height:43px;
+  border-radius:12px; background:#a08bff16; font-size:20px;
+}
+.step h3 { font:600 17px 'Space Grotesk',sans-serif; margin:16px 0 7px; }
+.step p { color:var(--muted); font-size:12px; margin-bottom:0; }
+
+.cta {
+  display:flex; justify-content:space-between; align-items:center;
+  flex-wrap:wrap; gap:20px; padding:29px;
+  border:1px solid #a08bff38; border-radius:18px;
+  background:radial-gradient(ellipse at 100% 0%,#a08bff20,transparent 45%),var(--panel);
+}
+.cta h2 { font:700 25px 'Space Grotesk',sans-serif; margin:6px 0; }
+.cta p { color:var(--muted); font-size:13px; margin-bottom:0; }
+footer { margin-top:65px; border-top:1px solid var(--line); padding:25px 0; color:var(--muted); font-size:11px; }
+.footer-inner { display:flex; justify-content:space-between; gap:15px; flex-wrap:wrap; }
+
+.overlay {
+  display:none; position:fixed; inset:0; z-index:30;
+  padding:18px; align-items:center; justify-content:center;
+  background:#05050bd9; backdrop-filter:blur(9px);
+}
+.overlay.open { display:flex; }
+.modal {
+  width:min(570px,100%); max-height:92vh; overflow:auto;
+  padding:24px; border:1px solid #ffffff1b;
+  border-radius:20px; background:#151520;
+  box-shadow:0 30px 100px #0009;
+  animation:appear .2s ease;
+}
+.modal-head {
+  display:flex; justify-content:space-between; align-items:start;
+  gap:15px; margin-bottom:20px;
+}
+.modal-head h2 { font:700 26px 'Space Grotesk',sans-serif; margin:5px 0; }
+.modal-head p { color:var(--muted); font-size:12px; margin:0; }
+.form-grid { display:grid; grid-template-columns:1fr 1fr; gap:15px; }
+.field { display:grid; gap:7px; min-width:0; }
+.field.full { grid-column:1/-1; }
+.field label { color:#d9d7e9; font-size:12px; font-weight:600; }
+.field input,.field select,.field textarea {
+  width:100%; min-width:0; padding:11px 12px;
+  border:1px solid var(--line); border-radius:10px;
+  background:#0d0d16; color:white; font-size:13px;
+}
+.field input::placeholder,.field textarea::placeholder { color:#77758b; }
+.field textarea { min-height:85px; resize:vertical; }
+.field select option { background:#141420; }
+
+.upload-box {
+  display:grid; place-items:center; gap:8px;
+  min-height:160px; padding:18px;
+  border:1px dashed #8370d880; border-radius:13px;
+  background:#a08bff07; text-align:center; cursor:pointer;
+  transition:.2s;
+}
+.upload-box:hover,.upload-box.dragover {
+  border-color:var(--accent); background:#a08bff12;
+}
+.upload-icon { font-size:29px; }
+.upload-title { font-size:13px; font-weight:700; }
+.upload-hint { color:var(--muted); font-size:11px; }
+.upload-hint strong { color:#c4b8ff; }
+#photoInput { display:none; }
+.preview-wrap { display:none; position:relative; width:100%; }
+.preview-wrap.show { display:block; }
+.preview-img {
+  display:block; width:100%; max-height:220px;
+  object-fit:contain; border-radius:10px; background:#08080e;
+}
+.preview-info { color:var(--muted); font-size:11px; margin-top:7px; overflow-wrap:anywhere; }
+.remove-photo {
+  margin-top:9px; border:1px solid #ff8fa644; color:var(--red);
+  background:#ff8fa610; padding:7px 10px; border-radius:8px; font-size:11px;
+}
+.form-error { min-height:0; color:var(--red); font-size:11px; }
+.form-hint { color:var(--muted); font-size:10px; line-height:1.6; }
+.form-actions { display:flex; justify-content:flex-end; gap:9px; margin-top:19px; }
+.toast {
+  position:fixed; right:20px; bottom:20px; z-index:50;
+  max-width:calc(100% - 40px); padding:13px 17px;
+  border:1px solid #a08bff65; border-radius:12px;
+  background:#191927; color:white; font-size:12px;
+  opacity:0; transform:translateY(10px); pointer-events:none;
+  transition:.2s; box-shadow:0 12px 35px #0007;
+}
+.toast.show { opacity:1; transform:translateY(0); }
+.toast.error { border-color:#ff8fa677; }
+
+@media(max-width:800px) {
+  .hero { padding:35px 27px; }
+  .hero-grid { grid-template-columns:1fr; }
+  .hero-art { min-height:225px; }
+  .grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .nav-links { gap:13px; }
+}
+@media(max-width:560px) {
+  .nav { min-height:65px; }
+  .nav-links { display:none; }
+  .brand { font-size:21px; }
+  .hero { padding:30px 21px; }
+  h1 { letter-spacing:-2px; }
+  .hero-art { min-height:210px; }
+  .hero-art::before { width:190px; height:190px; }
+  .hero-art::after { width:145px; height:145px; }
+  .hero-emblem { width:112px; height:112px; font-size:53px; border-radius:30px; }
+  .stats { margin-bottom:48px; }
+  .stat { padding:14px 9px; }
+  .stat-number { font-size:23px; }
+  .stat-label { font-size:10px; }
+  .section-head { align-items:start; }
+  .search { width:100%; }
+  .grid,.steps { grid-template-columns:1fr; }
+  .card-media { height:200px; }
+  .form-grid { grid-template-columns:1fr; }
+  .field.full { grid-column:auto; }
+  .modal { padding:18px; }
+  .cta { padding:22px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+    scroll-behavior:auto!important;
+  }
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#" aria-label="ReturnIt home">
+      <span class="brand-icon">↗</span>
+      <span class="brand-name">Return<span>It.</span></span>
+    </a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#listings">Explore</a>
+      <a href="#how">How it works</a>
+    </nav>
+    <button class="btn btn-primary" id="openReport">＋ Report item</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow"><span class="dot"></span> Your campus, connected</div>
+        <h1>Lost something?<br><span class="gradient">Let's bring it back.</span></h1>
+        <p class="muted">
+          A smarter space for campus lost and found. Share what you've lost,
+          report what you've found, and help belongings get back to their owners.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#listings">Explore listings ↗</a>
+          <button class="btn" id="heroReport">＋ Create a listing</button>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="hero-emblem">🎒</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats" aria-label="Listing statistics">
+    <div class="stat"><div class="stat-number" id="totalCount">0</div><div class="stat-label">Total listings</div></div>
+    <div class="stat"><div class="stat-number" id="lostCount">0</div><div class="stat-label">Items reported lost</div></div>
+    <div class="stat"><div class="stat-number" id="foundCount">0</div><div class="stat-label">Items reported found</div></div>
+  </section>
+
+  <section class="section" id="listings">
+    <div class="section-head">
+      <div>
+        <div class="kicker">Campus community board</div>
+        <h2 class="section-title">Discover listings.</h2>
+        <p class="muted">Search, filter and find the item you're looking for.</p>
+      </div>
+      <form class="search" id="searchForm">
+        <span aria-hidden="true">⌕</span>
+        <input type="search" id="searchInput" placeholder="Search items..." aria-label="Search listings">
+        <button class="btn btn-primary" type="submit">Search</button>
+      </form>
+    </div>
+
+    <div class="toolbar">
+      <div class="filters" aria-label="Listing filters">
+        <button class="chip active" data-filter="All" aria-pressed="true">All items</button>
+        <button class="chip" data-filter="Lost" aria-pressed="false">Lost</button>
+        <button class="chip" data-filter="Found" aria-pressed="false">Found</button>
+      </div>
+      <select class="sort" id="sortSelect" aria-label="Sort listings">
+        <option value="newest">Newest first</option>
+        <option value="oldest">Oldest first</option>
+        <option value="az">Name A–Z</option>
+      </select>
+    </div>
+
+    <div class="grid" id="itemsGrid" aria-live="polite"></div>
+  </section>
+
+  <section class="section" id="how">
+    <div class="kicker">Simple by design</div>
+    <h2 class="section-title">Lost. Listed. Reunited.</h2>
+    <p class="muted" style="margin-bottom:20px">Three simple steps to reconnect belongings with their owners.</p>
+    <div class="steps">
+      <article class="step"><div class="step-icon">📝</div><h3>01 — Report</h3><p>Share the item's photo, description and campus location.</p></article>
+      <article class="step"><div class="step-icon">🔎</div><h3>02 — Discover</h3><p>Search listings and filter by lost or found status.</p></article>
+      <article class="step"><div class="step-icon">🤝</div><h3>03 — Reconnect</h3><p>Use the campus return process to reunite people with their belongings.</p></article>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div><div class="kicker">Help your community</div><h2>Found something? Make a difference.</h2><p>One report could make someone's day.</p></div>
+    <button class="btn btn-primary" id="ctaReport">＋ Report an item</button>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <span>© 2026 ReturnIt · Campus Lost & Found</span>
+    <span>Designed for campus life.</span>
+  </div>
+</footer>
+
+<div class="overlay" id="reportModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="kicker">Community contribution</div>
+        <h2 id="modalTitle">Report an item</h2>
+        <p>Provide the details needed to identify the item.</p>
+      </div>
+      <button class="icon-btn" id="closeModal" type="button" aria-label="Close">×</button>
+    </div>
+
+    <form id="reportForm">
+      <div class="form-grid">
+        <div class="field">
+          <label for="itemName">Item name *</label>
+          <input id="itemName" maxlength="80" required placeholder="e.g. Black calculator">
+        </div>
+        <div class="field">
+          <label for="itemType">Report type *</label>
+          <select id="itemType" required>
+            <option value="Lost">I lost this item</option>
+            <option value="Found">I found this item</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="itemCategory">Category *</label>
+          <select id="itemCategory" required>
+            <option value="ID Cards">ID cards</option>
+            <option value="Books">Books</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Stationery">Stationery</option>
+            <option value="Keys & Wallets">Keys & wallets</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="itemLocation">Campus location *</label>
+          <input id="itemLocation" maxlength="100" required placeholder="e.g. Library, Block B">
+        </div>
+
+        <div class="field full">
+          <label>Item photo (optional)</label>
+          <input id="photoInput" type="file" accept="image/jpeg,image/png,image/webp">
+          <div class="upload-box" id="uploadBox" role="button" tabindex="0" aria-label="Choose item photo">
+            <div class="upload-icon">📷</div>
+            <div class="upload-title">Click to upload a photo</div>
+            <div class="upload-hint">JPG, PNG or WebP · Maximum <strong>5 MB</strong></div>
+          </div>
+          <div class="preview-wrap" id="previewWrap">
+            <img class="preview-img" id="photoPreview" alt="Preview of selected item photo">
+            <div class="preview-info" id="photoInfo"></div>
+            <button class="remove-photo" id="removePhoto" type="button">Remove photo ×</button>
+          </div>
+          <div class="form-error" id="photoError" role="status" aria-live="polite"></div>
+        </div>
+
+        <div class="field full">
+          <label for="itemDescription">Description *</label>
+          <textarea id="itemDescription" maxlength="500" required placeholder="Describe its appearance and distinguishing features."></textarea>
+        </div>
+
+        <div class="field full">
+          <p class="form-hint">
+            Avoid photos showing personal documents, student ID numbers, phone numbers or other sensitive information.
+            This prototype stores photos in this browser only. Supabase shared storage will be connected separately.
+          </p>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn" id="cancelModal" type="button">Cancel</button>
+        <button class="btn btn-primary" id="publishBtn" type="submit">Publish listing ↗</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+"use strict";
+
+const DB_NAME = "ReturnItPhotos";
+const DB_VERSION = 1;
+const STORE_NAME = "photos";
+const LIST_KEY = "returnit_listings_v2";
+const MAX_BYTES = 5 * 1024 * 1024;
+const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"];
+
+const sampleItems = [
+  {id:"demo-1",name:"Student ID Card",type:"Found",category:"ID Cards",location:"Central Library",description:"A student ID card was found near the library entrance.",createdAt:Date.now()-1200000,icon:"🪪",sample:true},
+  {id:"demo-2",name:"Wireless Earphones",type:"Lost",category:"Electronics",location:"College Canteen",description:"White wireless earphones in a compact charging case.",createdAt:Date.now()-3300000,icon:"🎧",sample:true},
+  {id:"demo-3",name:"Engineering Textbook",type:"Found",category:"Books",location:"Block B",description:"A textbook was left on a classroom desk.",createdAt:Date.now()-7200000,icon:"📚",sample:true},
+  {id:"demo-4",name:"Scientific Calculator",type:"Lost",category:"Electronics",location:"Exam Hall",description:"A calculator may have been left after class.",createdAt:Date.now()-14000000,icon:"🧮",sample:true},
+  {id:"demo-5",name:"Notebook",type:"Found",category:"Stationery",location:"Computer Lab",description:"A notebook was found near the laboratory entrance.",createdAt:Date.now()-23000000,icon:"📒",sample:true},
+  {id:"demo-6",name:"Keys and Keychain",type:"Lost",category:"Keys & Wallets",location:"Main Building",description:"A small keychain with several keys attached.",createdAt:Date.now()-40000000,icon:"🔑",sample:true}
+];
+
+const $ = id => document.getElementById(id);
+const grid = $("itemsGrid");
+const modal = $("reportModal");
+
+let items = loadItems();
+let filter = "All";
+let query = "";
+let selectedPhoto = null;
+let previewURL = null;
+let toastTimer;
+let photoDBPromise;
+
+function loadItems() {
+  try {
+    const saved = localStorage.getItem(LIST_KEY);
+    if (saved !== null) {
+      const parsed = JSON.parse(saved);
+      if (Array.isArray(parsed)) return parsed;
+    }
+  } catch (error) {
+    console.warn("Could not read demo listings.");
+  }
+  return [...sampleItems];
+}
+
+function saveItems() {
+  try {
+    localStorage.setItem(LIST_KEY, JSON.stringify(items));
+    return true;
+  } catch (error) {
+    showToast("Unable to save listing details in browser storage.", true);
+    return false;
+  }
+}
+
+function openPhotoDB() {
+  if (photoDBPromise) return photoDBPromise;
+
+  photoDBPromise = new Promise((resolve, reject) => {
+    if (!("indexedDB" in window)) {
+      reject(new Error("Photo storage is unavailable in this browser."));
+      return;
+    }
+
+    const request = indexedDB.open(DB_NAME, DB_VERSION);
+
+    request.onupgradeneeded = () => {
+      const db = request.result;
+      if (!db.objectStoreNames.contains(STORE_NAME)) {
+        db.createObjectStore(STORE_NAME);
+      }
+    };
+
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error || new Error("Could not open photo storage."));
+  });
+
+  return photoDBPromise;
+}
+
+async function putPhoto(id, blob) {
+  const db = await openPhotoDB();
+
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(STORE_NAME, "readwrite");
+    tx.objectStore(STORE_NAME).put(blob, id);
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error || new Error("Could not save photo."));
+    tx.onabort = () => reject(tx.error || new Error("Photo save was cancelled."));
+  });
+}
+
+async function getPhoto(id) {
+  const db = await openPhotoDB();
+
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(STORE_NAME, "readonly");
+    const request = tx.objectStore(STORE_NAME).get(id);
+    request.onsuccess = () => resolve(request.result || null);
+    request.onerror = () => reject(request.error || new Error("Could not retrieve photo."));
+  });
+}
+
+async function deletePhoto(id) {
+  try {
+    const db = await openPhotoDB();
+    await new Promise((resolve, reject) => {
+      const tx = db.transaction(STORE_NAME, "readwrite");
+      tx.objectStore(STORE_NAME).delete(id);
+      tx.oncomplete = resolve;
+      tx.onerror = () => reject(tx.error);
+    });
+  } catch (error) {
+    console.warn("Could not remove local photo.", error);
+  }
+}
+
+function showToast(message, error = false) {
+  const toast = $("toast");
+  toast.textContent = message;
+  toast.classList.toggle("error", error);
+  toast.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove("show"), 3500);
+}
+
+function makeElement(tag, className, text) {
+  const el = document.createElement(tag);
+  if (className) el.className = className;
+  if (text !== undefined) el.textContent = text;
+  return el;
+}
+
+function itemIcon(category) {
+  return ({
+    "ID Cards":"🪪",
+    "Books":"📚",
+    "Electronics":"🎧",
+    "Stationery":"📒",
+    "Keys & Wallets":"🔑",
+    "Other":"📦"
+  })[category] || "📦";
+}
+
+function formatDate(value) {
+  const date = new Date(value);
+  return Number.isNaN(date.getTime())
+    ? "Recently listed"
+    : date.toLocaleDateString(undefined, {day:"numeric",month:"short"});
+}
+
+function releasePreview() {
+  if (previewURL) URL.revokeObjectURL(previewURL);
+  previewURL = null;
+}
+
+function resetPhoto() {
+  selectedPhoto = null;
+  releasePreview();
+  $("photoInput").value = "";
+  $("previewWrap").classList.remove("show");
+  $("photoPreview").removeAttribute("src");
+  $("photoInfo").textContent = "";
+  $("uploadBox").style.display = "grid";
+  $("photoError").textContent = "";
+}
+
+function setPhotoError(message) {
+  $("photoError").textContent = message;
+}
+
+function choosePhoto(file) {
+  setPhotoError("");
+
+  if (!file) return;
+
+  if (!ALLOWED_TYPES.includes(file.type)) {
+    resetPhoto();
+    setPhotoError("Choose a JPG, PNG or WebP image.");
+    return;
+  }
+
+  if (file.size > MAX_BYTES) {
+    resetPhoto();
+    setPhotoError("Photo exceeds 5 MB. Choose a smaller image.");
+    return;
+  }
+
+  if (file.size === 0) {
+    resetPhoto();
+    setPhotoError("This image file is empty.");
+    return;
+  }
+
+  resetPhoto();
+  selectedPhoto = file;
+  previewURL = URL.createObjectURL(file);
+  $("photoPreview").src = previewURL;
+  $("photoInfo").textContent =
+    `${file.name} · ${(file.size / (1024 * 1024)).toFixed(2)} MB`;
+  $("uploadBox").style.display = "none";
+  $("previewWrap").classList.add("show");
+}
+
+$("uploadBox").addEventListener("click", () => $("photoInput").click());
+$("uploadBox").addEventListener("keydown", event => {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    $("photoInput").click();
+  }
+});
+
+$("photoInput").addEventListener("change", event => {
+  const file = event.target.files && event.target.files[0];
+  if (file) choosePhoto(file);
+});
+
+$("removePhoto").addEventListener("click", resetPhoto);
+
+$("uploadBox").addEventListener("dragover", event => {
+  event.preventDefault();
+  $("uploadBox").classList.add("dragover");
+});
+
+$("uploadBox").addEventListener("dragleave", () => {
+  $("uploadBox").classList.remove("dragover");
+});
+
+$("uploadBox").addEventListener("drop", event => {
+  event.preventDefault();
+  $("uploadBox").classList.remove("dragover");
+
+  const file = event.dataTransfer.files[0];
+  if (!file) return;
+
+  choosePhoto(file);
+});
+
+function updateFilters() {
+  document.querySelectorAll("[data-filter]").forEach(button => {
+    const active = button.dataset.filter === filter;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
+}
+
+async function renderItems() {
+  const visible = items.filter(item => {
+    const matchesFilter = filter === "All" || item.type === filter;
+    const searchable = [
+      item.name, item.category, item.location, item.description
+    ].join(" ").toLowerCase();
+    return matchesFilter && searchable.includes(query.toLowerCase());
+  });
+
+  const sort = $("sortSelect").value;
+  visible.sort((a,b) => {
+    if (sort === "az") return a.name.localeCompare(b.name);
+    return sort === "oldest" ? a.createdAt-b.createdAt : b.createdAt-a.createdAt;
+  });
+
+  $("totalCount").textContent = items.length;
+  $("lostCount").textContent = items.filter(item => item.type === "Lost").length;
+  $("foundCount").textContent = items.filter(item => item.type === "Found").length;
+
+  grid.replaceChildren();
+
+  if (!visible.length) {
+    const empty = makeElement("div", "empty");
+    empty.append(
+      makeElement("div", "empty-icon", "⌕"),
+      makeElement("h3", "", "No matching listings"),
+      makeElement("p", "", "Try another keyword or clear your filters.")
+    );
+    const clear = makeElement("button", "btn btn-primary", "Clear filters");
+    clear.type = "button";
+    clear.addEventListener("click", () => {
+      query = "";
+      $("searchInput").value = "";
+      filter = "All";
+      updateFilters();
+      renderItems();
+    });
+    empty.appendChild(clear);
+    grid.appendChild(empty);
+    return;
+  }
+
+  for (const [index, item] of visible.entries()) {
+    const card = makeElement("article", "card");
+    card.style.animationDelay = `${Math.min(index, 8) * 35}ms`;
+
+    const media = makeElement("div", "card-media");
+    const badge = makeElement("span", "status" + (item.type === "Found" ? " found" : ""), item.type);
+    media.appendChild(badge);
+
+    if (item.hasPhoto) {
+      try {
+        const blob = await getPhoto(item.id);
+        if (blob) {
+          const img = document.createElement("img");
+          img.alt = `Photo of ${item.name}`;
+          img.loading = "lazy";
+          img.src = URL.createObjectURL(blob);
+          media.appendChild(img);
+        } else {
+          media.appendChild(makeElement("span", "card-placeholder", itemIcon(item.category)));
+        }
+      } catch (error) {
+        media.appendChild(makeElement("span", "card-placeholder", itemIcon(item.category)));
+      }
+    } else {
+      media.appendChild(makeElement("span", "card-placeholder", item.icon || itemIcon(item.category)));
+    }
+
+    const body = makeElement("div", "card-body");
+    body.appendChild(makeElement("div", "category", item.category));
+    body.appendChild(makeElement("h3", "", item.name));
+    body.appendChild(makeElement("p", "description", item.description));
+    body.appendChild(makeElement("div", "location", `⌖  ${item.location}`));
+
+    const bottom = makeElement("div", "card-bottom");
+    bottom.appendChild(makeElement("span", "date", formatDate(item.createdAt)));
+
+    const details = makeElement("button", "btn", "View details ↗");
+    details.type = "button";
+    details.addEventListener("click", () => {
+      showToast(`${item.name} · ${item.type} · ${item.location}. Claim processing will be added with Supabase.`);
+    });
+    bottom.appendChild(details);
+    body.appendChild(bottom);
+    card.append(media, body);
+    grid.appendChild(card);
+  }
+}
+
+function openModal() {
+  modal.classList.add("open");
+  document.body.style.overflow = "hidden";
+  setTimeout(() => $("itemName").focus(), 50);
+}
+
+function closeModal() {
+  modal.classList.remove("open");
+  document.body.style.overflow = "";
+  $("openReport").focus();
+}
+
+["openReport","heroReport","ctaReport"].forEach(id => {
+  $(id).addEventListener("click", openModal);
+});
+
+$("closeModal").addEventListener("click", closeModal);
+$("cancelModal").addEventListener("click", closeModal);
+
+modal.addEventListener("click", event => {
+  if (event.target === modal) closeModal();
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape" && modal.classList.contains("open")) closeModal();
+});
+
+document.querySelectorAll("[data-filter]").forEach(button => {
+  button.addEventListener("click", () => {
+    filter = button.dataset.filter;
+    updateFilters();
+    renderItems();
+  });
+});
+
+$("searchForm").addEventListener("submit", event => {
+  event.preventDefault();
+  query = $("searchInput").value.trim();
+  renderItems();
+});
+
+$("searchInput").addEventListener("input", event => {
+  query = event.target.value.trim();
+  renderItems();
+});
+
+$("sortSelect").addEventListener("change", renderItems);
+
+$("reportForm").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  const name = $("itemName").value.trim();
+  const type = $("itemType").value;
+  const category = $("itemCategory").value;
+  const location = $("itemLocation").value.trim();
+  const description = $("itemDescription").value.trim();
+
+  if (!name || !location || !description) {
+    showToast("Please complete all required fields.", true);
+    return;
+  }
+
+  if (selectedPhoto &&
+      (!ALLOWED_TYPES.includes(selectedPhoto.type) || selectedPhoto.size > MAX_BYTES)) {
+    setPhotoError("Select a valid image smaller than or equal to 5 MB.");
+    return;
+  }
+
+  const id = "item-" + crypto.randomUUID();
+  const newItem = {
+    id, name, type, category, location, description,
+    icon:itemIcon(category),
+    createdAt:Date.now(),
+    hasPhoto:Boolean(selectedPhoto),
+    sample:false
+  };
+
+  const oldItems = items;
+  items = [newItem, ...items];
+
+  // Save listing metadata first; roll back if browser storage is unavailable.
+  if (!saveItems()) {
+    items = oldItems;
+    return;
+  }
+
+  $("publishBtn").disabled = true;
+  $("publishBtn").textContent = "Publishing...";
+
+  try {
+    if (selectedPhoto) await putPhoto(id, selectedPhoto);
+  } catch (error) {
+    items = oldItems;
+    saveItems();
+    showToast("Could not save the photo in this browser. Try a smaller image.", true);
+    $("publishBtn").disabled = false;
+    $("publishBtn").textContent = "Publish listing ↗";
+    return;
+  }
+
+  filter = "All";
+  query = "";
+  $("searchInput").value = "";
+  $("sortSelect").value = "newest";
+  updateFilters();
+  $("reportForm").reset();
+  resetPhoto();
+  closeModal();
+
+  $("publishBtn").disabled = false;
+  $("publishBtn").textContent = "Publish listing ↗";
+
+  await renderItems();
+  showToast("Listing published in this browser's demo.");
+  $("listings").scrollIntoView({behavior:"smooth"});
+});
+
+renderItems();
+</script>
+</body>
+</html>
