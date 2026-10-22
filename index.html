@@ -473,6 +473,42 @@ footer { margin-top:65px; border-top:1px solid var(--line); padding:25px 0; colo
     <div><div class="kicker">Help your community</div><h2>Found something? Make a difference.</h2><p>One report could make someone's day.</p></div>
     <button class="btn btn-primary" id="ctaReport">＋ Report an item</button>
   </section>
+
+<section id="security-lab" class="section" style="padding-top:24px;padding-bottom:40px">
+  <div class="section-heading">
+    <div><span class="eyebrow">CONTRIBUTOR PRACTICE</span><h2>ReturnIt Security Lab</h2>
+      <p class="muted">Isolated browser-only exercises using dummy data. No Supabase records are changed.</p></div>
+  </div>
+  <div class="grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px">
+    <article class="card" style="padding:20px">
+      <span class="eyebrow">Exercise 01</span><h3>Listing access</h3>
+      <p class="muted">Try viewing or changing a demo listing by its ID. Review how ownership is checked.</p>
+      <label for="labItemId">Listing ID</label>
+      <input id="labItemId" value="RI-2002" style="width:100%;margin:8px 0;padding:10px;border-radius:8px">
+      <label for="labItemStatus">New status</label>
+      <select id="labItemStatus" style="width:100%;margin:8px 0;padding:10px;border-radius:8px"><option>Open</option><option>Claimed</option><option>Returned</option></select>
+      <button class="btn btn-primary" id="labItemAction" type="button">View / update demo listing</button>
+      <pre id="labItemOutput" style="white-space:pre-wrap;overflow-wrap:anywhere;margin-top:12px"></pre>
+    </article>
+    <article class="card" style="padding:20px">
+      <span class="eyebrow">Exercise 02</span><h3>Search query handling</h3>
+      <p class="muted">This is a front-end simulation of unsafe SQL string construction, not a real database query.</p>
+      <label for="labSearch">Search term</label>
+      <input id="labSearch" placeholder="Try a normal search term" style="width:100%;margin:8px 0;padding:10px;border-radius:8px">
+      <button class="btn btn-primary" id="labSearchAction" type="button">Run simulated search</button>
+      <pre id="labSearchOutput" style="white-space:pre-wrap;overflow-wrap:anywhere;margin-top:12px"></pre>
+    </article>
+    <article class="card" style="padding:20px">
+      <span class="eyebrow">Exercise 03</span><h3>Photo upload checks</h3>
+      <p class="muted">Select a file to inspect what browser-only validation can and cannot guarantee. Nothing is uploaded to a server.</p>
+      <label for="labFile">Choose test file</label>
+      <input id="labFile" type="file" style="display:block;width:100%;margin:12px 0">
+      <button class="btn btn-primary" id="labFileAction" type="button">Inspect selected file</button>
+      <pre id="labFileOutput" style="white-space:pre-wrap;overflow-wrap:anywhere;margin-top:12px"></pre>
+    </article>
+  </div>
+</section>
+
 </main>
 
 <footer>
@@ -1226,6 +1262,51 @@ $("reportForm").addEventListener("submit", async event => {
   await renderItems();
   showToast("Listing published in this browser's demo.");
   $("listings").scrollIntoView({behavior:"smooth"});
+});
+
+
+// SECURITY LAB: intentionally weak demo logic for contributor review.
+// These exercises operate only on dummy browser-side data; they do not call Supabase.
+const labItems = [
+  { id: "RI-1001", ownerId: "student-1001", name: "Blue notebook", status: "Open" },
+  { id: "RI-2002", ownerId: "student-2002", name: "Demo wallet", status: "Open" }
+];
+const labCurrentUserId = "student-1001";
+
+// Exercise 01: intentionally fails to enforce ownership before updating by ID.
+$("labItemAction").addEventListener("click", () => {
+  const requestedId = $("labItemId").value.trim();
+  const item = labItems.find(row => row.id === requestedId);
+  if (!item) {
+    $("labItemOutput").textContent = "No demo listing found.";
+    return;
+  }
+  item.status = $("labItemStatus").value;
+  $("labItemOutput").textContent = JSON.stringify({
+    currentUser: labCurrentUserId,
+    itemId: item.id,
+    itemOwner: item.ownerId,
+    itemName: item.name,
+    status: item.status
+  }, null, 2);
+});
+
+// Exercise 02: intentionally builds a SQL-looking string with raw user input.
+// It is displayed only; no SQL is executed and no database is connected.
+$("labSearchAction").addEventListener("click", () => {
+  const term = $("labSearch").value;
+  const simulatedSql = "SELECT id, name FROM items WHERE name ILIKE '%" + term + "%';";
+  $("labSearchOutput").textContent = "SIMULATED QUERY (not executed):\n" + simulatedSql +
+    "\n\nReview whether raw input should be concatenated into a SQL statement.";
+});
+
+// Exercise 03: intentionally reports file metadata without validating type or size.
+// The file stays in the browser and is never uploaded or executed.
+$("labFileAction").addEventListener("click", () => {
+  const file = $("labFile").files[0];
+  $("labFileOutput").textContent = file
+    ? JSON.stringify({ name: file.name, type: file.type || "(no MIME type)", sizeBytes: file.size, accepted: true }, null, 2)
+    : "Choose a file first.";
 });
 
 renderItems();
