@@ -1292,29 +1292,32 @@ $("#idorTry").addEventListener("click", () => {
     "Success: " + item.name + " was edited by its owner. Demo data only.";
 });
 
-// Challenge 02: simulated unsafe query construction; no SQL is executed.
-$("#idorTry").addEventListener("click", () => {
-  const item = securityDemoItems.find(
-    x => x.id === $("#idorItem").value
-  );
-  const actor = $("#idorActor").value;
-  const result = $("#idorResult");
+// Challenge 02: safe SQL-injection demonstration.
+// This page never executes SQL and never sends the input to Supabase.
+// The UI demonstrates the correct parameterized-query pattern instead
+// of concatenating untrusted input into SQL text.
+$("#sqlDemoTry").addEventListener("click", () => {
+  const input = $("#sqlDemoInput").value;
+  const result = $("#sqlDemoResult");
 
-  if (!item) {
-    result.textContent = "Access denied: item not found.";
-    return;
-  }
-
-  if (!actor || actor !== item.owner) {
-    result.textContent =
-      "Access denied: you cannot edit another account's item.";
-    return;
-  }
-
-  item.description = "Edited by " + actor;
+  // In a real backend, this would be a prepared/parameterized statement:
+  // SELECT id, name, category, location, description
+  // FROM listings
+  // WHERE name ILIKE '%' || $1 || '%'
+  //
+  // The user value is supplied separately as a parameter, so it cannot
+  // change the SQL statement structure.
+  const parameterizedQuery =
+    "SELECT id, name, category, location, description " +
+    "FROM listings WHERE name ILIKE '%' || $1 || '%'";
 
   result.textContent =
-    "Success: " + item.name + " was edited by its owner. Demo data only.";
+    "Safe pattern: parameterized query. " +
+    "SQL stays fixed and the search value is passed separately as $1. " +
+    "Input received: " + JSON.stringify(input) +
+    ". No SQL is executed in this browser-only challenge.";
+
+  result.title = parameterizedQuery;
 });
 
 // Challenge 03: validate the selected demo file before accepting it.
