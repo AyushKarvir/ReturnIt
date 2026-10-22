@@ -560,7 +560,6 @@ footer { margin-top:65px; border-top:1px solid var(--line); padding:25px 0; colo
 </div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-```html
 <div class="overlay" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
   <div class="modal">
     <div class="modal-head">
@@ -601,14 +600,17 @@ footer { margin-top:65px; border-top:1px solid var(--line); padding:25px 0; colo
     </form>
   </div>
 </div>
-```
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 "use strict";
 
-const SUPABASE_URL = "https://dykaututgrmdzoydbzsd.supabase.co/rest/v1/";
+const SUPABASE_URL = "https://dykaututgrmdzoydbzsd.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_zRljq87lXv2N81GxA9mi6Q_sIHZK33R";
+
+if (!window.supabase || typeof window.supabase.createClient !== "function") {
+  throw new Error("Supabase SDK did not load. Check your internet connection and refresh.");
+}
 
 const supabaseClient = window.supabase.createClient(
   SUPABASE_URL,
@@ -642,7 +644,6 @@ let selectedPhoto = null;
 let previewURL = null;
 let toastTimer;
 let photoDBPromise;
-  ```javascript
 // Authentication state
 let currentUser = null;
 let authMode = "login";
@@ -757,7 +758,7 @@ $("authForm").addEventListener("submit", async event => {
         showToast("Your account has been created.");
       } else {
         $("authError").textContent =
-          "Account request submitted. Check your email to confirm your address, then sign in.";
+          "Account created/requested. Check your inbox (and spam folder) for the confirmation email, then sign in.";
       }
     } else {
       const { error } = await supabaseClient.auth.signInWithPassword({
@@ -804,7 +805,6 @@ async function initializeAuth() {
 }
 
 initializeAuth();
-```
 
 
 function loadItems() {
