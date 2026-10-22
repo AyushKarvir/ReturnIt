@@ -1317,13 +1317,41 @@ $("#idorTry").addEventListener("click", () => {
     "Success: " + item.name + " was edited by its owner. Demo data only.";
 });
 
-// Challenge 03: intentionally reports file metadata without validating it.
-// The selected file remains local and is never uploaded or executed.
+// Challenge 03: validate the selected demo file before accepting it.
+// This is browser-only validation; real uploads must repeat checks on a trusted server.
+const DEMO_UPLOAD_MAX_BYTES = 5 * 1024 * 1024;
+const DEMO_UPLOAD_ALLOWED_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
+
 $("uploadDemoTry").addEventListener("click", () => {
-  const file = $("uploadDemoInput").files?.[0];
-  $("uploadDemoResult").textContent = file
-    ? "Demo accepted selection: " + file.name + " (" + file.type + ", " + file.size + " bytes). No upload occurred. Investigate type, size, content-signature and server-side validation."
-    : "Choose a harmless test file first.";
+  const input = $("uploadDemoInput");
+  const result = $("uploadDemoResult");
+  const file = input.files && input.files[0];
+
+  if (!file) {
+    result.textContent = "Choose a file first.";
+    return;
+  }
+
+  if (file.size === 0) {
+    result.textContent = "Rejected: the selected file is empty.";
+    return;
+  }
+
+  if (file.size > DEMO_UPLOAD_MAX_BYTES) {
+    result.textContent = "Rejected: files must be 5 MB or smaller.";
+    input.value = "";
+    return;
+  }
+
+  if (!DEMO_UPLOAD_ALLOWED_TYPES.has(file.type)) {
+    result.textContent = "Rejected: only JPEG, PNG, and WebP images are allowed.";
+    input.value = "";
+    return;
+  }
+
+  result.textContent = "Accepted for this local demo: " + file.name +
+    " (" + file.type + ", " + file.size + " bytes). No file was uploaded. " +
+    "A production server must independently validate file content and enforce these limits.";
 });
 
 
