@@ -340,36 +340,88 @@ footer { margin-top:65px; border-top:1px solid var(--line); padding:25px 0; colo
 .toast.show { opacity:1; transform:translateY(0); }
 .toast.error { border-color:#ff8fa677; }
 
-@media(max-width:800px) {
-  .hero { padding:35px 27px; }
+/* Responsive layout: desktop, tablet and phone */
+img { max-width:100%; }
+input, select, textarea, button { max-width:100%; }
+.wrap { width:min(1160px, calc(100% - 40px)); }
+
+@media (max-width: 1024px) {
+  .hero { padding:40px 32px; }
+  .hero-grid { grid-template-columns:minmax(0, 1.1fr) minmax(220px, .9fr); gap:16px; }
+  .grid { grid-template-columns:repeat(2, minmax(0, 1fr)); }
+  .nav-links { gap:16px; }
+}
+@media (max-width: 800px) {
+  .wrap { width:calc(100% - 32px); }
+  .nav { min-height:68px; gap:12px; }
+  .nav-links { gap:12px; }
+  .hero { padding:34px 26px; }
   .hero-grid { grid-template-columns:1fr; }
-  .hero-art { min-height:225px; }
-  .grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .nav-links { gap:13px; }
-}
-@media(max-width:560px) {
-  .nav { min-height:65px; }
-  .nav-links { display:none; }
-  .brand { font-size:21px; }
-  .hero { padding:30px 21px; }
-  h1 { letter-spacing:-2px; }
   .hero-art { min-height:210px; }
-  .hero-art::before { width:190px; height:190px; }
-  .hero-art::after { width:145px; height:145px; }
-  .hero-emblem { width:112px; height:112px; font-size:53px; border-radius:30px; }
-  .stats { margin-bottom:48px; }
-  .stat { padding:14px 9px; }
-  .stat-number { font-size:23px; }
-  .stat-label { font-size:10px; }
-  .section-head { align-items:start; }
-  .search { width:100%; }
-  .grid,.steps { grid-template-columns:1fr; }
-  .card-media { height:200px; }
-  .form-grid { grid-template-columns:1fr; }
-  .field.full { grid-column:auto; }
-  .modal { padding:18px; }
-  .cta { padding:22px; }
+  .hero-copy { max-width: none; }
+  .section { margin-bottom:52px; }
+  .stats { margin-bottom:52px; }
+  .steps { grid-template-columns:repeat(2, minmax(0, 1fr)); }
+  .modal { width:min(570px, 100%); }
 }
+@media (max-width: 560px) {
+  body { font-size:15px; }
+  .wrap { width:calc(100% - 24px); }
+  .nav { min-height:64px; flex-wrap:wrap; padding:10px 0; }
+  .brand { font-size:20px; gap:8px; }
+  .brand-icon { width:34px; height:34px; }
+  .nav-links { display:none; }
+  header .nav > div { gap:6px !important; }
+  header .btn { padding:9px 10px; font-size:11px; }
+  .hero { margin-top:16px; padding:27px 18px; border-radius:19px; }
+  h1 { font-size:clamp(34px, 10vw, 48px); letter-spacing:-1.7px; }
+  .hero-copy { font-size:13px; }
+  .hero-art { min-height:175px; }
+  .hero-art::before { width:170px; height:170px; }
+  .hero-art::after { width:132px; height:132px; }
+  .hero-emblem { width:104px; height:104px; font-size:48px; border-radius:27px; }
+  .hero-actions { gap:8px; }
+  .hero-actions .btn { flex:1 1 145px; }
+  .stats { grid-template-columns:repeat(3, minmax(0, 1fr)); margin:14px 0 42px; }
+  .stat { padding:13px 5px; text-align:center; }
+  .stat-number { font-size:clamp(18px, 5.5vw, 23px); }
+  .stat-label { font-size:9px; line-height:1.35; }
+  .section { margin-bottom:44px; }
+  .section-head { align-items:stretch; gap:14px; }
+  .section-title { font-size:27px; }
+  .search { width:100%; }
+  .search input { width:100%; font-size:13px; }
+  .toolbar { align-items:flex-start; }
+  .filters { width:100%; }
+  .chip { padding:8px 10px; }
+  .sort { max-width:100%; }
+  .grid,.steps { grid-template-columns:1fr; }
+  .card-media { height:205px; }
+  .card-body { padding:14px; }
+  .cta { padding:20px; }
+  .cta h2 { font-size:22px; }
+  .cta > .btn { width:100%; }
+  .form-grid { grid-template-columns:minmax(0, 1fr); }
+  .field.full { grid-column:auto; }
+  .overlay { padding:8px; align-items:flex-end; }
+  .modal { width:100%; max-height:94dvh; padding:17px; border-radius:18px 18px 12px 12px; }
+  .modal-head h2 { font-size:23px; }
+  .field input,.field select,.field textarea { font-size:16px; }
+  .upload-box { min-height:130px; }
+  .form-actions { flex-wrap:wrap; }
+  .form-actions .btn { flex:1; }
+  .toast { right:12px; bottom:12px; max-width:calc(100% - 24px); }
+  footer { margin-top:42px; }
+}
+@media (max-width: 360px) {
+  .wrap { width:calc(100% - 18px); }
+  .brand { font-size:18px; }
+  header .btn { padding:8px; font-size:10px; }
+  .hero { padding:23px 14px; }
+  .stat-label { font-size:8px; }
+  .hero-actions .btn { flex-basis:100%; }
+}
+
 @media(prefers-reduced-motion:reduce) {
   *,*::before,*::after {
     animation-duration:.01ms!important;
@@ -466,46 +518,6 @@ footer { margin-top:65px; border-top:1px solid var(--line); padding:25px 0; colo
     <div><div class="kicker">Help your community</div><h2>Found something? Make a difference.</h2><p>One report could make someone's day.</p></div>
     <button class="btn btn-primary" id="ctaReport">＋ Report an item</button>
   </section>
-
-  <section class="section" id="security-challenges" aria-labelledby="security-title">
-    <div class="kicker">Open-source contributor tasks</div>
-    <h2 class="section-title" id="security-title">Security challenges</h2>
-    <p class="muted">Three frontend-only training challenges using dummy data. They do not call Supabase or change real listings.</p>
-    <div class="steps">
-      <article class="step">
-        <div class="step-icon">🔐</div><h3>Challenge 01 — Access control</h3>
-        <p>Inspect whether the demo checks item ownership before allowing a change.</p>
-        <label for="idorItem" class="muted">Dummy listing</label>
-        <select id="idorItem" class="sort" style="max-width:100%;width:100%;margin:8px 0">
-          <option value="demo-a">Library book (owner: account-a)</option>
-          <option value="demo-b">Calculator (owner: account-b)</option>
-        </select>
-        <label for="idorActor" class="muted">Current demo account</label>
-        <select id="idorActor" class="sort" style="max-width:100%;width:100%;margin:8px 0">
-          <option value="account-b">Account B</option><option value="account-a">Account A</option>
-        </select>
-        <button class="btn" id="idorTry" type="button">Attempt demo edit</button>
-        <p class="muted" id="idorResult" aria-live="polite"></p>
-      </article>
-      <article class="step">
-        <div class="step-icon">🧪</div><h3>Challenge 02 — SQL injection concepts</h3>
-        <p>This is a query-construction simulation only; it does not execute SQL or contact a database.</p>
-        <label for="sqlDemoInput" class="muted">Search input</label>
-        <input id="sqlDemoInput" maxlength="120" placeholder="Try normal text or a quote" style="width:100%;margin:8px 0;padding:10px;border-radius:9px;background:#0d0d16;color:white;border:1px solid var(--line)">
-        <button class="btn" id="sqlDemoTry" type="button">Inspect simulated query</button>
-        <p class="muted" id="sqlDemoResult" aria-live="polite"></p>
-      </article>
-      <article class="step">
-        <div class="step-icon">📁</div><h3>Challenge 03 — File validation</h3>
-        <p>Choose a harmless test file. This local exercise demonstrates why client-side checks alone are not a security boundary. The file is not uploaded.</p>
-        <label for="uploadDemoInput" class="muted">Choose a test file</label>
-        <input id="uploadDemoInput" type="file" style="width:100%;margin:8px 0">
-        <button class="btn" id="uploadDemoTry" type="button">Inspect selected file</button>
-        <p class="muted" id="uploadDemoResult" aria-live="polite"></p>
-      </article>
-    </div>
-  </section>
-
 </main>
 <footer>
   <div class="wrap footer-inner">
@@ -977,7 +989,7 @@ function setPhotoError(message) {
   $("photoError").textContent = message;
 }
 
-function choosePhoto(file) {
+async function choosePhoto(file) {
   setPhotoError("");
 
   if (!file) return;
@@ -997,6 +1009,27 @@ function choosePhoto(file) {
   if (file.size === 0) {
     resetPhoto();
     setPhotoError("This image file is empty.");
+    return;
+  }
+
+  // Verify basic file signatures as well as the browser-reported MIME type.
+  // This is useful client-side validation, not a substitute for server checks.
+  let signatureIsValid = false;
+  try {
+    const bytes = new Uint8Array(await file.slice(0, 12).arrayBuffer());
+    const isJpeg = bytes.length >= 3 && bytes[0] === 0xFF && bytes[1] === 0xD8 && bytes[2] === 0xFF;
+    const isPng = bytes.length >= 8 && bytes[0] === 0x89 && bytes[1] === 0x50 && bytes[2] === 0x4E && bytes[3] === 0x47 && bytes[4] === 0x0D && bytes[5] === 0x0A && bytes[6] === 0x1A && bytes[7] === 0x0A;
+    const isWebp = bytes.length >= 12 && String.fromCharCode(...bytes.slice(0, 4)) === "RIFF" && String.fromCharCode(...bytes.slice(8, 12)) === "WEBP";
+    signatureIsValid = (file.type === "image/jpeg" && isJpeg) ||
+      (file.type === "image/png" && isPng) ||
+      (file.type === "image/webp" && isWebp);
+  } catch (_) {
+    signatureIsValid = false;
+  }
+
+  if (!signatureIsValid) {
+    resetPhoto();
+    setPhotoError("The file content does not match a supported JPG, PNG or WebP image.");
     return;
   }
 
@@ -1205,7 +1238,7 @@ $("reportForm").addEventListener("submit", async event => {
   }
 
   if (selectedPhoto &&
-      (!ALLOWED_TYPES.includes(selectedPhoto.type) || selectedPhoto.size > MAX_BYTES)) {
+      (!ALLOWED_TYPES.includes(selectedPhoto.type) || selectedPhoto.size === 0 || selectedPhoto.size > MAX_BYTES)) {
     setPhotoError("Select a valid image smaller than or equal to 5 MB.");
     return;
   }
@@ -1257,104 +1290,6 @@ $("reportForm").addEventListener("submit", async event => {
   await renderItems();
   showToast("Listing published in this browser's demo.");
   $("listings").scrollIntoView({behavior:"smooth"});
-});
-
-
-// Security-lab demonstrations: dummy data only; never call Supabase here.
-const securityDemoItems = [
-  {id:"demo-a", name:"Library book", owner:"account-a", description:"Dummy record"},
-  {id:"demo-b", name:"Calculator", owner:"account-b", description:"Dummy record"}
-];
-
-// Challenge 01: intentionally weak demo authorization. Fix by enforcing ownership
-// on a trusted server/database, not merely by trusting a client-supplied ID.
-$("#idorTry").addEventListener("click", () => {
-  const item = securityDemoItems.find(
-    x => x.id === $("#idorItem").value
-  );
-  const actor = $("#idorActor").value;
-  const result = $("#idorResult");
-
-  if (!item) {
-    result.textContent = "Access denied: item not found.";
-    return;
-  }
-
-  if (!actor || actor !== item.owner) {
-    result.textContent =
-      "Access denied: you cannot edit another account's item.";
-    return;
-  }
-
-  item.description = "Edited by " + actor;
-
-  result.textContent =
-    "Success: " + item.name + " was edited by its owner. Demo data only.";
-});
-
-// Challenge 02: safe SQL-injection demonstration.
-// This page never executes SQL and never sends the input to Supabase.
-// The UI demonstrates the correct parameterized-query pattern instead
-// of concatenating untrusted input into SQL text.
-$("#sqlDemoTry").addEventListener("click", () => {
-  const input = $("#sqlDemoInput").value;
-  const result = $("#sqlDemoResult");
-
-  // In a real backend, this would be a prepared/parameterized statement:
-  // SELECT id, name, category, location, description
-  // FROM listings
-  // WHERE name ILIKE '%' || $1 || '%'
-  //
-  // The user value is supplied separately as a parameter, so it cannot
-  // change the SQL statement structure.
-  const parameterizedQuery =
-    "SELECT id, name, category, location, description " +
-    "FROM listings WHERE name ILIKE '%' || $1 || '%'";
-
-  result.textContent =
-    "Safe pattern: parameterized query. " +
-    "SQL stays fixed and the search value is passed separately as $1. " +
-    "Input received: " + JSON.stringify(input) +
-    ". No SQL is executed in this browser-only challenge.";
-
-  result.title = parameterizedQuery;
-});
-
-// Challenge 03: validate the selected demo file before accepting it.
-// This is browser-only validation; real uploads must repeat checks on a trusted server.
-const DEMO_UPLOAD_MAX_BYTES = 5 * 1024 * 1024;
-const DEMO_UPLOAD_ALLOWED_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
-
-$("uploadDemoTry").addEventListener("click", () => {
-  const input = $("uploadDemoInput");
-  const result = $("uploadDemoResult");
-  const file = input.files && input.files[0];
-
-  if (!file) {
-    result.textContent = "Choose a file first.";
-    return;
-  }
-
-  if (file.size === 0) {
-    result.textContent = "Rejected: the selected file is empty.";
-    return;
-  }
-
-  if (file.size > DEMO_UPLOAD_MAX_BYTES) {
-    result.textContent = "Rejected: files must be 5 MB or smaller.";
-    input.value = "";
-    return;
-  }
-
-  if (!DEMO_UPLOAD_ALLOWED_TYPES.has(file.type)) {
-    result.textContent = "Rejected: only JPEG, PNG, and WebP images are allowed.";
-    input.value = "";
-    return;
-  }
-
-  result.textContent = "Accepted for this local demo: " + file.name +
-    " (" + file.type + ", " + file.size + " bytes). No file was uploaded. " +
-    "A production server must independently validate file content and enforce these limits.";
 });
 
 
